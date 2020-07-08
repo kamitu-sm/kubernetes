@@ -38,10 +38,10 @@ A scheduler watches for newly created Pods that have no Node assigned. For every
 ***control manager***
 A controller is a control loop that watches the shared state of the cluster through the apiserver and makes changes attempting to move the current state towards the desired state.
 There are four controllers bundled into the control manager black box in the diagram above
- 1.Node controller
- 2.Replication Controller
- 3.Endpoint controller
- 4.service account and token control
+1. Node controller
+2. Replication Controller
+3. Endpoint controller
+4. Service account and token control
 
 Overall health of the entire cluster
 
