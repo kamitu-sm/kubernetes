@@ -29,15 +29,19 @@ At minimum you need one master node and one or many worker nodes. In a high avai
 ### Master Node ### 
 The Master node is made up of 4 components
 
-*** API server ***
+***API server***
 The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. The API Server services REST operations and provides the frontend to the cluster's shared state through which all other components interact.
-Scheduler - scheduling of pods 
 
-Four controllers behind the control manager
-Node controller
-Replication Controller
-Endpoint controller
-service account and token control
+***Scheduler***
+A scheduler watches for newly created Pods that have no Node assigned. For every Pod that the scheduler discovers, the scheduler becomes responsible for finding the best Node for that Pod to run on based on the requirements provided.
+
+***control manager***
+A controller is a control loop that watches the shared state of the cluster through the apiserver and makes changes attempting to move the current state towards the desired state.
+There are four controllers bundled into the control manager black box in the diagram above
+ 1.Node controller
+ 2.Replication Controller
+ 3.Endpoint controller
+ 4.service account and token control
 
 Overall health of the entire cluster
 
