@@ -1,7 +1,7 @@
 PCI Compliant AWS Architecture 
 ==============================
 
-![picture alt](https://github.com/kamitu-sm/ictlife/blob/master/PCI_Architecure/aws-pci-compliant-architecture.png "PCI ARCHITECTURE") 
+![picture alt](https://github.com/kamitu-sm/kubernetes/blob/master/Introduction/k8s-basic-architecture.png "KUBERNETES ARCHITECTURE") 
 
 The architecture includes the following features depending on the requirements being addressed:
 
