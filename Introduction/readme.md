@@ -38,10 +38,10 @@ A scheduler watches for newly created Pods that have no Node assigned. For every
 ***control manager***
 A controller is a control loop that watches the shared state of the cluster through the apiserver and makes changes attempting to move the current state towards the desired state.
 There are four controllers bundled into the control manager black box in the diagram above
-1. Node controller
-2. Replication Controller
-3. Endpoint controller
-4. Service account and token control
+1. Node controller: Responsible for noticing and responding when nodes go down.
+2. Replication controller: Responsible for maintaining the correct number of pods for every replication controller object in the system.
+3. Endpoints controller: Populates the Endpoints object (that is, joins Services & Pods).
+4. Service Account & Token controllers: Create default accounts and API access tokens for new namespaces.
 
 This controllers are responsible for the overall health of the entire cluster
 
@@ -56,4 +56,4 @@ Every node in cluster must run a container runtime such as docker or rocket.
 The kubelet is the primary "node agent" that runs on each node. Within a Kubernetes cluster, the kubelet functions as a local agent that watches for pod specs via the Kubernetes API server. The kubelet is also responsible for registering a node with a Kubernetes cluster, sending events and pod status, and reporting resource utilization.
 
 ***kubeproxy*** 
-- responsible for mainataining the entire network configuration, (core networking conmonent)
+kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
