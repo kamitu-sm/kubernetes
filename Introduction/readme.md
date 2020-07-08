@@ -43,12 +43,11 @@ There are four controllers bundled into the control manager black box in the dia
 3. Endpoint controller
 4. Service account and token control
 
-Overall health of the entire cluster
+This controllers are responsible for the overall health of the entire cluster
 
-etcd 
-distributed key value database, 
-central db to store current cluster state at any point of time, 
-single source of truth for all the componets that require to know the state of the cluster
+***etcd***
+This is a distributed key value database store developed by CoreOS. Its the central database used to store current cluster state at any point of time. It is the single source of truth for all queries by components in regard to the state of the cluster. 
+*In a mulitmaster cluster configuration we can only have on etcd store*
 
 ### Worker Node ### 
 Every node in cluster must run a container runtime such as docker or rocket
