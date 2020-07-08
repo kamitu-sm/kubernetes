@@ -50,6 +50,10 @@ This is a distributed key value database store developed by CoreOS. Its the cent
 *In a mulitmaster cluster configuration we can only have on etcd store*
 
 ### Worker Node ### 
-Every node in cluster must run a container runtime such as docker or rocket
-kubelet - primary node agent that runs on each worker node 
-kubeproxy - responsible for mainataining the entire network configuration, (core networking conmonent)
+Every node in cluster must run a container runtime such as docker or rocket.
+
+***kubelet***
+The kubelet is the primary "node agent" that runs on each node. Within a Kubernetes cluster, the kubelet functions as a local agent that watches for pod specs via the Kubernetes API server. The kubelet is also responsible for registering a node with a Kubernetes cluster, sending events and pod status, and reporting resource utilization.
+
+***kubeproxy*** 
+- responsible for mainataining the entire network configuration, (core networking conmonent)
