@@ -1,4 +1,4 @@
-PCI Compliant AWS Architecture 
+Kubernetes Architecture 
 ==============================
 
 ![picture alt](https://github.com/kamitu-sm/kubernetes/blob/master/Introduction/k8s-basic-architecture.png "KUBERNETES ARCHITECTURE") 
