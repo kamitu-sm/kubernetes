@@ -26,4 +26,24 @@ At minimum you need one master node and one or many worker nodes. In a high avai
 
 ![picture alt](https://github.com/kamitu-sm/kubernetes/blob/master/Introduction/k8s-basic-architecture.png "KUBERNETES ARCHITECTURE") 
 
+### Master Node ### 
+API server - user interactions and gate keeper
+Scheduler - scheduling of pods 
 
+Four controllers behind the control manager
+Node controller
+Replication Controller
+Endpoint controller
+service account and token control
+
+Overall health of the entire cluster
+
+etcd 
+distributed key value database, 
+central db to store current cluster state at any point of time, 
+single source of truth for all the componets that require to know the state of the cluster
+
+### Worker Node ### 
+Every node in cluster must run a container runtime such as docker or rocket
+kubelet - primary node agent that runs on each worker node 
+kubeproxy - responsible for mainataining the entire network configuration, (core networking conmonent)
