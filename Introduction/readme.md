@@ -27,7 +27,10 @@ At minimum you need one master node and one or many worker nodes. In a high avai
 ![picture alt](https://github.com/kamitu-sm/kubernetes/blob/master/Introduction/k8s-basic-architecture.png "KUBERNETES ARCHITECTURE") 
 
 ### Master Node ### 
-API server - user interactions and gate keeper
+The Master node is made up of 4 components
+
+*** API server ***
+The Kubernetes API server validates and configures data for the api objects which include pods, services, replicationcontrollers, and others. The API Server services REST operations and provides the frontend to the cluster's shared state through which all other components interact.
 Scheduler - scheduling of pods 
 
 Four controllers behind the control manager
