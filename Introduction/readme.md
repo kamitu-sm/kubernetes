@@ -14,10 +14,11 @@ In kubernetes world a pod is the base unit of the kubernetes cluster, all config
 Containers within a Pod share an IP address and port space, and can find each other via localhost. Containers in different Pods have distinct IP addresses and cannot communicate by IPC without special configuration. These containers usually communicate with each other via Pod IP addresses.
 
 ### Node ### 
- A node is a physical server or virtual machines with an operating systems running on top of it.
+A node is a physical server or virtual machines with an operating systems running on top of it.
 The kubernetes cluster is made up of two classifications of nodes
 1.	Master nodes (Primary responsibility is management of the cluster components)
 2.	Worker node (Doing the actual workload also known as minions)
+
 At minimum you need one master node and one or many worker nodes. In a high availability cluster you can have multiple master nodes. 
 
 ## Basic Components of the Kubernetes Architecture ##   
