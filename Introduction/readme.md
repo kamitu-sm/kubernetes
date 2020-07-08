@@ -2,7 +2,7 @@ Understanding Kubernetes
 ==============================
 
 1. ***Introduction to Kubernetes*** 
-        Container orchestration is the automatic process of managing or scheduling the work of individual containers for applications within multiple clusters. Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services (i.e. it’s a container orchestration Engine), that facilitates both declarative configuration and automation
+Container orchestration is the automatic process of managing or scheduling the work of individual containers for applications within multiple clusters. Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services (i.e. it’s a container orchestration Engine), that facilitates both declarative configuration and automation
 
 2. ***Kubernetes architecture and terminology*** 
 By understanding the architecture and terminologies we are able to better understand the various configurations that are needed to build and maintain your kubernetes cluster.
