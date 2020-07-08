@@ -57,3 +57,8 @@ The kubelet is the primary "node agent" that runs on each node. Within a Kuberne
 
 ***kubeproxy*** 
 kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept. kube-proxy maintains network rules on nodes. These network rules allow network communication to your Pods from network sessions inside or outside of your cluster.
+
+## User Interaction with the Cluster ##  
+The user interacts with the cluster via two methods
+1. ***kubectl*** This is the cli way of interacting with the kubernates cluster
+2. ***GUI*** This is a graphical user interafce for interacting with the Cluster. It is usually based on a dashboard.  
