@@ -14,24 +14,23 @@ Turning a single control plane cluster created without --control-plane-endpoint 
 ### POD Network ###
 You can install only one Pod network per cluster. There are couple of options for this including calico, weave and flannel. Some POD networks have certain restrictions on the IP address range for the pods. Calico will automatically detect which IP address range to use for pod IPs based on the value provided via the --pod-network-cidr flag or via kubeadm's configuration.
 
-### Kubeadm Initialization Config File ###
+### Initialization Config File ###
 We will be using a YAML file for kubeadm intialization. This needs only be done once on one of the Master nodes. Create a YAML file with the contents below in your current working directory. 
 
 ```bash
 # 
-# kubeadm token generate
-y40psg.1gl8f0exzc11pedz
-# vi kubeadm-config.yaml
+#
 # cat kubeadm-config.yaml
 apiVersion: kubeadm.k8s.io/v1beta2
 bootstrapTokens:
-- groups:
-- system:bootstrappers:kubeadm:default-node-token
-token: y40psg.1gl8f0exzc11pedz
-ttl: 24h0m0s
-usages:
-- signing
-- authentication
+- token: "y40psg.1gl8f0exzc11pedz"
+  description: "My bootstrap token"
+  ttl: "24h"
+  usages:
+  - authentication
+  - signing
+  groups:
+  - system:bootstrappers:kubeadm:default-node-token
 kind: InitConfiguration
 localAPIEndpoint:
   advertiseAddress: 192.168.100.29
@@ -42,8 +41,8 @@ nodeRegistration:
   taints:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
-kubeletExtraArgs:
-  cgroup-driver: systemd
+  kubeletExtraArgs:
+    cgroup-driver: systemd
 ---
 apiServer:
   extraArgs:
@@ -52,7 +51,7 @@ apiServer:
 apiVersion: kubeadm.k8s.io/v1beta1
 certificatesDir: /etc/kubernetes/pki
 clusterName: kubernetes
-controlPlaneEndpoint: "k8s_api_lb:6443"
+controlPlaneEndpoint: "k8s-api-lb:6443"
 controllerManager: {}
 dns:
   type: CoreDNS
@@ -135,6 +134,31 @@ The control-plane node is the machine where the control plane components run, in
 
 On the Master run the command below
 
-sudo kubeadm init --config kubeadm-config.yaml --upload-certs
+```bash
+# sudo kubeadm config images pull
+W0711 17:58:31.015389   53936 configset.go:202] WARNING: kubeadm cannot validate component configs for API groups [kubelet.config.k8s.io kubeproxy.config.k8s.io]
+[config/images] Pulled k8s.gcr.io/kube-apiserver:v1.18.5
+[config/images] Pulled k8s.gcr.io/kube-controller-manager:v1.18.5
+[config/images] Pulled k8s.gcr.io/kube-scheduler:v1.18.5
+[config/images] Pulled k8s.gcr.io/kube-proxy:v1.18.5
+[config/images] Pulled k8s.gcr.io/pause:3.2
+[config/images] Pulled k8s.gcr.io/etcd:3.4.3-0
+[config/images] Pulled k8s.gcr.io/coredns:1.6.7
+# sudo kubeadm init --config kubeadm-config.yaml --upload-certs 2>&1 |tee kubeadm_init_ouput.txt 
+```
 
-The --upload-certs flag is used to upload the certificates that should be shared across all the control-plane instances to the cluster. If instead, you prefer to copy certs across control-plane nodes manually or using automation tools, please remove this flag and refer to Manual certificate distribution section below.
+The first command pre pulls the required images for the adminstrative tasks
+
+The --upload-certs flag is used to upload the certificates that should be shared across all the control-plane instances to the cluster. If instead, you prefer to copy certs across control-plane nodes manually or using automation tools, please remove this flag. There are a lot of advantages for using this
+
+We are piping using tee to a file because of the intresting ouput this command generates including the join command for future nodes.
+
+## Step 2: ***Initializing the POD Network*** ##
+
+On the Master run the command below
+
+```bash
+# sudo kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+```
+
+Once a Pod network has been installed, you can confirm that it is working by checking that the CoreDNS Pod is Running in the output of ***kubectl get pods --all-namespaces***. And once the CoreDNS Pod is up and running, you can continue by joining your nodes.
