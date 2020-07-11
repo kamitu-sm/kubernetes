@@ -247,7 +247,7 @@ The --upload-certs flag is used to upload the certificates that should be shared
 
 We are piping using tee to a file because of the intresting ouput this command generates including the join command for future nodes.
 
-## Step 2: ***Follow the instructions from the above output *** ##
+## Step 2: ***Follow the instructions from the above output*** ##
 
 Run the commands below as a normal user to be able to use kubectl
 
@@ -340,3 +340,6 @@ kube-system   kube-controller-manager-k8s-master-1       1/1     Running   0    
 kube-system   kube-proxy-vtrbm                           1/1     Running   0          16m
 kube-system   kube-scheduler-k8s-master-1                1/1     Running   0          16m
 ```
+
+## Step 4: ***Adding another master*** ##
+## Step 5: ***Adding worker node*** ##
