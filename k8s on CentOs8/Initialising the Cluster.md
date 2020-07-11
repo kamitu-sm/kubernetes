@@ -37,7 +37,7 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
-  name: k8s-master-1
+  name: k8s_master_1
   taints:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
@@ -95,7 +95,7 @@ This is equivalent to the --apiserver-advertise-address flag as discussed above
 ***--control-plane-endpoint***
 
 ```bash
-controlPlaneEndpoint: "k8s_api_lb:6443"
+controlPlaneEndpoint: "k8s-api-lb:6443"
 ```
 This is equivalent to the --control-plane-endpoint flag as discussed above
 
