@@ -252,7 +252,7 @@ Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, 
 EOF
 ```
 
-The make the directory for the docker systemd service
+Create the directory for the docker systemd service
 
 ```bash
 # mkdir -p /etc/systemd/system/docker.service.d
