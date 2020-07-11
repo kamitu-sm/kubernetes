@@ -90,7 +90,7 @@ If you will not be using a DNS server, edit /etc/hosts file to contain the follo
 192.168.100.40 k8s_node_2
 ```
 
-5. Install and configure Docker
+5. Install Docker
 
 ```bash
 # yum config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
@@ -230,7 +230,8 @@ Is this ok [y/N]:
 
 ```
 
-Setup daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We dont want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons
+6. Configure Docker daemon
+Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons
 
 
 ```bash
