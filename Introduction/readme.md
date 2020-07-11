@@ -15,9 +15,7 @@ Let us start with core terminologies that are required to understand the archite
 A computer cluster is a set of loosely or tightly connected computers that work together so that, in many respects, they can be viewed as a single system. 
 
 ***Node***
-A node is a physical server or virtual machines with an operating systems running on top of it.
-
-Kubernetes is really a master-slave type of architecture with certain components (master components) calling the shots in the cluster, and other components (node components) executing application workloads (containers) as decided by the master components.Therefore kubernetes cluster is made up of two classifications of nodes
+A node is a physical server or virtual machines with an operating systems running on top of it. Kubernetes is really a master-slave type of architecture with certain components (master components) calling the shots in the cluster, and other components (node components) executing application workloads (containers) as decided by the master components.Therefore kubernetes cluster is made up of two classifications of nodes
 1.	Master/Control Plane nodes (The control-plane/Master node is the machine where the master components run)
 2.	Worker/Minion node (The worker/minion node is the machine where application workloads run)
 
@@ -28,8 +26,7 @@ In kubernetes world a pod is the base unit of the kubernetes cluster, all config
 Containers within a Pod share an IP address and port space, and can find each other via localhost. Containers in different Pods have distinct IP addresses and cannot communicate by IPC without special configuration. These containers usually communicate with each other via Pod IP addresses.
 
 ***Container***
-Put simply, a container consists of an entire runtime environment: an application, plus all its dependencies, libraries and other binaries, and configuration files needed to run it, bundled into one package. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away.
- Containers are a solution to the problem of how to get software to run reliably when moved from one computing environment to another. This could be from a developer's laptop to a test environment, from a staging environment into production, and perhaps from a physical machine in a data center to a virtual machine in a private or public cloud. Problems arise when the supporting software environment is not identical. "You're going to test using Python 2.7, and then it's going to run on Python 3 in production and something weird will happen. Or you'll rely on the behavior of a certain version of an SSL library and another one will be installed. You'll run your tests on Debian and production is on Red Hat and all sorts of weird things happen."
+Put simply, a container consists of an entire runtime environment: an application, plus all its dependencies, libraries and other binaries, and configuration files needed to run it, bundled into one package. By containerizing the application platform and its dependencies, differences in OS distributions and underlying infrastructure are abstracted away. Containers are a solution to the problem of how to get software to run reliably when moved from one computing environment to another. This could be from a developer's laptop to a test environment, from a staging environment into production, and perhaps from a physical machine in a data center to a virtual machine in a private or public cloud. Problems arise when the supporting software environment is not identical. "You're going to test using Python 2.7, and then it's going to run on Python 3 in production and something weird will happen. Or you'll rely on the behavior of a certain version of an SSL library and another one will be installed. You'll run your tests on Debian and production is on Red Hat and all sorts of weird things happen."
 
 
 ## The Kubernetes Architecture ##   
