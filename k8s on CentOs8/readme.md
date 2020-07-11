@@ -67,7 +67,7 @@ Allow all traffic between the cluster nodes by creating an accept all rule on ip
 
 For runtime type
 ```bash
-# swapoff –a
+# swapoff -a
 ```
 
 To make this configuration persistent between reboots, edit the /etc/fstab file and comment out all lines for mounting any swap file system into the system
