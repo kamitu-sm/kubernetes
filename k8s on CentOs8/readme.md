@@ -265,7 +265,7 @@ Restart Docker
 # systemctl restart docker
 ```
 
-6. Install kubeadm, kubectl and kubelet
+7. Install kubeadm, kubectl and kubelet
 
 
 Kubernetes packages are not available in the default CentOS 8 repositories. Make sure to create a kuberentes repo file with the contents below before you do the install.
