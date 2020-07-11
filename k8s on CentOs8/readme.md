@@ -65,8 +65,19 @@ Allow all traffic between the cluster nodes by creating an accept all rule on ip
 
 3. Disable swap and enable port forwarding
 
-To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers to cluster to work properly disable swap, or alternatively set vm.swappiness=0. 
-Modify the kernel parameters for filtering and port forwarding. Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This will make the changes persistent between reboots. Additionally we are also setting vm.swappiness to 0, meaning to disable swap.
+For runtime type
+```bash
+# swapoff –a
+```
+
+To make this configuration persistent between reboots, edit the /etc/fstab file and comment out all lines for mounting any swap file system into the system
+
+```bash
+# sed -i 's/^.*swap/#&/' /etc/fstab
+```
+
+To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers to cluster to work properly disable swap, also set vm.swappiness=0. 
+Modify the kernel parameters for filtering, port forwarding and vm.swappiness. Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This will make the changes persistent between reboots.
 
 ```bash
 # vi /etc/sysctl.d/k8s.conf
