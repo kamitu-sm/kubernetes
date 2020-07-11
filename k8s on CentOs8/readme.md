@@ -4,7 +4,7 @@ We will be creating a single control-plane cluster using kubeadm. We will also b
 
 ## Pre-flight checklist ## 
 
-1. Two or more machines running a CentOS 8.
+1. Two or more machines running CentOS 8.
 2. 2 GiB or more of RAM per machine, any less leaves little room for your apps.
 3. At least 2 CPUs on the machine that you use as a control-plane node.
 4. IP plan for the setup
