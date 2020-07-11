@@ -19,11 +19,11 @@ We will be creating a single control-plane cluster using kubeadm. We will also b
 3. At least 2 CPUs on the machine that you use as a control-plane node.
 4. IP plan for the setup. Turning a single control plane cluster created without --control-plane-endpoint into a highly available cluster is not supported by kubeadm. We are using this arguement to point to the same master node using a DNS entry **k8s_api_lb**, Later you can modify this DNS entry to point to the address of your load-balancer in an high availability scenario without having to intialise your cluster.
 
-Node Role        | IP Address       | Notes
+Node Role        | IP Address       | DNS Name
 ---------------- | -----------------| ------------
-Master           | 192.168.100.29   | Master Node
-Worker           | 192.168.100.40   | 
-API Loadbalancer | 192.168.100.29   | DNS Entry pointing back to master
+Master           | 192.168.100.29   | k8s_master_1
+Worker           | 192.168.100.40   | k8s_node_2
+API Loadbalancer | 192.168.100.29   | k8s_api_lb (DNS Entry pointing back to master) 
 
 
 5. Full network connectivity among all machines in the cluster.
