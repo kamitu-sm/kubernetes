@@ -29,3 +29,56 @@ Worker     | 192.168.100.29
 7. Choose a Pod network add-on, and verify whether it requires any arguments to be passed to kubeadm when initialising the cluster. Depending on which third-party provider you choose, you might need to set the --pod-network-cidr to a provider-specific value. ***We will be using Calico***
 
 
+## Preparing all servers ##
+
+There are a few things to be done to get the servers ready. You need to perform the following task on all servers. 
+
+
+1. Disable the Selinux
+
+The containers need to access the host file system; therefore SELinux needs to be disabled. Edit the /etc/selinux/config file and change SELINUX=enforcing to SELINUX=disabled or permissive
+
+```bash
+ # sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+```
+
+After this a reboot is required
+
+
+2. Disable firewalld and enable forwarding
+
+
+As long as firewalld,the system firewall manager is enabled, DNS resolution inside docker containers does not work. We are going to be using iptables, disable firewalld daemon
+
+```bash
+# systemctl disable firewalld
+# systemctl stop firewalld
+```
+
+Allow all traffic between the cluster nodes by creating an accept all rule on iptables
+
+```bash
+# iptables -P FORWARD ACCEPT
+```
+
+3. Disable swap and enable Forwarding
+
+To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers to cluster to work properly disable swap, or alternatively set vm.swappiness=0. 
+Modify the kernel parameters for filtering and port forwarding. Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This will make the changes persistent between reboots. Additionally we are also setting vm.swappiness to 0, meaning to disable swap.
+
+```bash
+# vi /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.ipv4.ip_forward = 1
+vm.swappiness=0
+```
+
+Force systclt daemon to read the contents of its configuration files
+
+```bash
+# sysctl --system
+```
+
+4. Set the DNS names
+If you will not be using a DNS server, edit /etc/hosts file to contain the following:
