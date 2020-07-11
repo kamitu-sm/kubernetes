@@ -233,33 +233,25 @@ Is this ok [y/N]:
 ```
 
 6. Configure Docker daemon
-Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons
+Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons. This file */etc/docker/daemon.json* might need to be created
 
 
 ```bash
-# cat > /etc/docker/daemon.json <<EOF
+# vi /etc/docker/daemon.json
+# cat /etc/docker/daemon.json 
 {
-"exec-opts": ["native.cgroupdriver=systemd"],
-"log-driver": "json-file",
-"log-opts": {
-"max-size": "100m"
-},
-"storage-driver": "overlay2",
-"storage-opts": [
-"overlay2.override_kernel_check=true"
-]
+	"exec-opts": ["native.cgroupdriver=systemd"],
+	"log-driver": "json-file",
+	"log-opts": {
+		"max-size": "100m"
+	},
+	"storage-driver": "overlay2",
+	"storage-opts": ["overlay2.override_kernel_check=true"]
 }
-EOF
-```
 
-Create the directory for the docker systemd service
-
-```bash
-# mkdir -p /etc/systemd/system/docker.service.d
 ```
 
 Restart Docker
-
 
 ```bash
 # systemctl daemon-reload
@@ -282,8 +274,59 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
        https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+#
 # yum repolist
+repo id                                                            repo name
+AppStream                                                          CentOS-8 - AppStream
+BaseOS                                                             CentOS-8 - Base
+docker-ce-stable                                                   Docker CE Stable - x86_64
+extras                                                             CentOS-8 - Extras
+kubernetes                                                         Kubernetes
+#
 # yum install kubelet kubeadm kubectl
+Kubernetes                                                                                                    154  B/s | 454  B     00:02    
+Kubernetes                                                                                                    2.0 kB/s | 1.8 kB     00:00    
+Importing GPG key 0xA7317B0F:
+ Userid     : "Google Cloud Packages Automatic Signing Key <gc-team@google.com>"
+ Fingerprint: D0BC 747F D8CA F711 7500 D6FA 3746 C208 A731 7B0F
+ From       : https://packages.cloud.google.com/yum/doc/yum-key.gpg
+Is this ok [y/N]: y
+Importing GPG key 0xBA07F4FB:
+ Userid     : "Google Cloud Packages Automatic Signing Key <gc-team@google.com>"
+ Fingerprint: 54A6 47F9 048D 5688 D7DA 2ABE 6A03 0B21 BA07 F4FB
+ From       : https://packages.cloud.google.com/yum/doc/yum-key.gpg
+Is this ok [y/N]: y
+Kubernetes                                                                                                    3.0 kB/s | 975  B     00:00    
+Importing GPG key 0x3E1BA8D5:
+ Userid     : "Google Cloud Packages RPM Signing Key <gc-team@google.com>"
+ Fingerprint: 3749 E1BA 95A8 6CE0 5454 6ED2 F09C 394C 3E1B A8D5
+ From       : https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+Is this ok [y/N]: y
+Kubernetes                                                                                                     22 kB/s |  98 kB     00:04    
+Dependencies resolved.
+==============================================================================================================================================
+ Package                                    Architecture               Version                           Repository                      Size
+==============================================================================================================================================
+Installing:
+ kubeadm                                    x86_64                     1.18.5-0                          kubernetes                     8.8 M
+ kubectl                                    x86_64                     1.18.5-0                          kubernetes                     9.5 M
+ kubelet                                    x86_64                     1.18.5-0                          kubernetes                      21 M
+Installing dependencies:
+ conntrack-tools                            x86_64                     1.4.4-10.el8                      BaseOS                         204 k
+ cri-tools                                  x86_64                     1.13.0-0                          kubernetes                     5.1 M
+ kubernetes-cni                             x86_64                     0.8.6-0                           kubernetes                      18 M
+ libnetfilter_cthelper                      x86_64                     1.0.0-15.el8                      BaseOS                          24 k
+ libnetfilter_cttimeout                     x86_64                     1.0.0-11.el8                      BaseOS                          24 k
+ libnetfilter_queue                         x86_64                     1.0.2-11.el8                      BaseOS                          30 k
+ socat                                      x86_64                     1.7.3.3-2.el8                     AppStream                      302 k
+
+Transaction Summary
+==============================================================================================================================================
+Install  10 Packages
+
+Total download size: 62 M
+Installed size: 265 M
+
 # systemctl daemon-reload
 # systemctl enable kubelet
 # systemctl restart kubelet
