@@ -236,16 +236,14 @@ kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
     
 #
 #
-# mv kubeadm_init_ouput.txt kubeadm_init_ouput.txt.bak
+# mv kubeadm_init_ouput.txt kubeadm_init_ouput_11_07_2020_18_52.bak
 ```
 
-The first command pre pulls the required images for the adminstrative tasks
-The second command initilises the control plane
-The last command backs up the ouput incase you run the command again
+1. The first command pre pulls the required images for the adminstrative tasks
+2. The second command initialises the control plane, we are piping using tee to a file because of the interesting output this command generates including the ***kubeadm join*** command for future nodes. The --upload-certs flag is used to upload the certificates that should be shared across all the control-plane instances to the cluster. If instead, you prefer to copy certs across control-plane nodes manually or using automation tools, please remove this flag. There are a lot of advantages for using this
+3. The last command backs up the output incase you run the command in future and need to compare outputs
 
-The --upload-certs flag is used to upload the certificates that should be shared across all the control-plane instances to the cluster. If instead, you prefer to copy certs across control-plane nodes manually or using automation tools, please remove this flag. There are a lot of advantages for using this
 
-We are piping using tee to a file because of the intresting ouput this command generates including the join command for future nodes.
 
 ## Step 2: ***Follow the instructions from the above output*** ##
 
@@ -258,10 +256,11 @@ Run the commands below as a normal user to be able to use kubectl
   $  sudo chown $(id -u):$(id -g) $HOME/.kube/config
   
 ```
+***Make sure you are running the kubectl command as the user in this step***
 
 ## Step 3: ***Initializing the POD Network*** ##
 
-On the Master run the command below as the user above
+When we run the command ***kubectl get pods --all-namespaces***, we notice that the coredns pod is in pending status
 
 ```bash
 $ kubectl get pods --all-namespaces
@@ -273,7 +272,11 @@ kube-system   kube-apiserver-k8s-master-1            1/1     Running   0        
 kube-system   kube-controller-manager-k8s-master-1   1/1     Running   0          11m
 kube-system   kube-proxy-vtrbm                       1/1     Running   0          11m
 kube-system   kube-scheduler-k8s-master-1            1/1     Running   0          11m
+```
 
+On the Master run the command ***kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml***. 
+
+```bash
 $ kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
 configmap/calico-config created
 customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
