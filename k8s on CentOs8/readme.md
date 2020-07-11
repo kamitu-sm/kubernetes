@@ -45,7 +45,7 @@ The containers need to access the host file system; therefore SELinux needs to b
 After this a reboot is required
 
 
-2. Disable firewalld and enable forwarding
+2. Disable firewalld
 
 
 As long as firewalld,the system firewall manager is enabled, DNS resolution inside docker containers does not work. We are going to be using iptables, disable firewalld daemon
@@ -61,7 +61,7 @@ Allow all traffic between the cluster nodes by creating an accept all rule on ip
 # iptables -P FORWARD ACCEPT
 ```
 
-3. Disable swap and enable Forwarding
+3. Disable swap and enable port forwarding
 
 To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers to cluster to work properly disable swap, or alternatively set vm.swappiness=0. 
 Modify the kernel parameters for filtering and port forwarding. Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This will make the changes persistent between reboots. Additionally we are also setting vm.swappiness to 0, meaning to disable swap.
