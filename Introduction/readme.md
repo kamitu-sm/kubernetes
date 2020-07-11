@@ -16,9 +16,10 @@ A computer cluster is a set of loosely or tightly connected computers that work 
 
 ### Node ### 
 A node is a physical server or virtual machines with an operating systems running on top of it.
-The kubernetes cluster is made up of two classifications of nodes
-1.	Master nodes (Primary responsibility is management of the cluster components)
-2.	Worker node (Doing the actual workload also known as minions)
+
+Kubernetes is really a master-slave type of architecture with certain components (master components) calling the shots in the cluster, and other components (node components) executing application workloads (containers) as decided by the master components.Therefore kubernetes cluster is made up of two classifications of nodes
+1.	Master/Control Plane nodes (The control-plane/Master node is the machine where the master components run)
+2.	Worker/Minion node (The worker/minion node is the machine where application workloads run)
 
 At minimum you need one master node and one or many worker nodes. **In a high availability cluster you can have multiple master nodes.** 
 
