@@ -1,6 +1,4 @@
-# Initializing your control-plane node #
-
-The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
+# Initializing your Cluster #
 
 ### Considerations about --apiserver-advertise-address and --control-plane-endpoint ###
 
@@ -17,7 +15,7 @@ Turning a single control plane cluster created without --control-plane-endpoint 
 You can install only one Pod network per cluster. Calico will automatically detect which IP address range to use for pod IPs based on the value provided via the --pod-network-cidr flag or via kubeadm's configuration.
 
 ### Kubeadm Initialization Config File ###
-We will be using a YAML file for kubeadm intialisation. This needs only be done once on one of the Master nodes. Create a YAML file with the contents below in your current working directory. 
+We will be using a YAML file for kubeadm intialization. This needs only be done once on one of the Master nodes. Create a YAML file with the contents below in your current working directory. 
 
 ```bash
 # 
@@ -131,7 +129,9 @@ networking:
   
 This is equivalent to the --pod-network-cidr flag. Some POD networks have certain restrictions on this range. Calico will automatically detect which IP address range to use for pod IPs based on the value provided via the --pod-network-cidr flag or via kubeadm's configuration. Makes sure it does not confilct with your node IP addressing
 
-## STEPS ##
+## Step 1: ***Initializing the Control Plane*** ##
+
+The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
 
 On the Master run the command below
 
