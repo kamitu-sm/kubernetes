@@ -48,7 +48,7 @@ After this a reboot is required
 2. Disable firewalld
 
 
-As long as firewalld,the system firewall manager is enabled, DNS resolution inside docker containers does not work. We are going to be using iptables, disable firewalld daemon
+As long as firewalld(the system firewall manager) is enabled, DNS resolution inside docker containers does not work. We are going to be using iptables, disable firewalld daemon
 
 ```bash
 # systemctl disable firewalld
