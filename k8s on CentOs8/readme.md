@@ -17,12 +17,14 @@ We will be creating a single control-plane cluster using kubeadm. We will also b
 1. Two or more machines running CentOS 8.
 2. 2 GiB or more of RAM per machine, any less leaves little room for your apps.
 3. At least 2 CPUs on the machine that you use as a control-plane node.
-4. IP plan for the setup
+4. IP plan for the setup. Turning a single control plane cluster created without --control-plane-endpoint into a highly available cluster is not supported by kubeadm. We are using this arguement to point to the same master node using a DNS entry **k8s_api_lb**, Later you can modify this DNS entry to point to the address of your load-balancer in an high availability scenario without having to intialise your cluster.
 
-Node Role  | IP Address
----------- | -------------
-Master     | 192.168.100.29
-Worker     | 192.168.100.29
+Node Role        | IP Address       | Notes
+---------------- | -----------------| ------------
+Master           | 192.168.100.29   | Master Node
+Worker           | 192.168.100.40   | 
+API Loadbalancer | 192.168.100.29   | DNS Entry pointing back to master
+
 
 5. Full network connectivity among all machines in the cluster.
 6. A version of kubeadm that can deploy the version of Kubernetes that you want to use in your new cluster.
