@@ -1,6 +1,6 @@
 # Installing Kubernetes Cluster on Centos 8 (kubeadm) #
 
-We will be creating a single control-plane cluster using kubeadm. We will also be providing for future expansion into a multi control plane cluster with a stacked etcd store. This is good for a small setups that will be scaled out in future. 
+We will be creating a single control-plane cluster using kubeadm. We will also be providing for future expansion into a multi control plane cluster with a * ***stacked etcd store***. This is good for a small setups that will be scaled out in future. 
 
 ***Note (What is meant by stacked etcd store)***
 *In the introduction a note was made that the etcd store and the k8s cluster are considered seperate. There are two options for highly available kubernetes clusters.*
