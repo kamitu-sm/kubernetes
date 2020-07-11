@@ -2,7 +2,7 @@
 
 The control-plane node is the machine where the control plane components run, including etcd (the cluster database) and the API Server (which the kubectl command line tool communicates with).
 
-### Considerations about apiserver-advertise-address and ControlPlaneEndpoint ###
+### Considerations about --apiserver-advertise-address and --control-plane-endpoint ###
 
 While --apiserver-advertise-address can be used to set the advertise address for this particular control-plane node's API server, --control-plane-endpoint can be used to set the shared endpoint for all control-plane nodes. --control-plane-endpoint allows both IP addresses and DNS names that can map to IP addresses. The --control-plane-endpoint flag should be set to the DNS and port of the load balancer(for high availability scenario).
 
