@@ -37,7 +37,7 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
-  name: k8s_master_1
+  name: k8s-master-1
   taints:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
@@ -144,6 +144,9 @@ W0711 17:58:31.015389   53936 configset.go:202] WARNING: kubeadm cannot validate
 [config/images] Pulled k8s.gcr.io/pause:3.2
 [config/images] Pulled k8s.gcr.io/etcd:3.4.3-0
 [config/images] Pulled k8s.gcr.io/coredns:1.6.7
+#
+#
+#
 # sudo kubeadm init --config kubeadm-config.yaml --upload-certs 2>&1 |tee kubeadm_init_ouput.txt 
 ```
 
