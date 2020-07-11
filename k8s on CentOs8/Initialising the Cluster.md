@@ -12,7 +12,7 @@ Where 192.168.0.102 is the IP address of this node and cluster-endpoint is a cus
 Turning a single control plane cluster created without --control-plane-endpoint into a highly available cluster is not supported by kubeadm
 
 ### POD Network ###
-You can install only one Pod network per cluster. Calico will automatically detect which IP address range to use for pod IPs based on the value provided via the --pod-network-cidr flag or via kubeadm's configuration.
+You can install only one Pod network per cluster. There are couple of options for this including calico, weave and flannel. Some POD networks have certain restrictions on the IP address range for the pods. Calico will automatically detect which IP address range to use for pod IPs based on the value provided via the --pod-network-cidr flag or via kubeadm's configuration.
 
 ### Kubeadm Initialization Config File ###
 We will be using a YAML file for kubeadm intialization. This needs only be done once on one of the Master nodes. Create a YAML file with the contents below in your current working directory. 
