@@ -47,7 +47,7 @@ This controllers are responsible for the overall health of the entire cluster
 
 ***etcd***
 This is a distributed key value database store developed by CoreOS. Its the central database used to store current cluster state at any point of time. It is the single source of truth for all queries by components in regard to the state of the cluster. 
-**In a multi-master cluster configuration we can only have one etcd store, this etcd store can actually be a cluster which in itself is different from the kubernetes cluster**
+**In a multi-master cluster configuration we can only have one etcd store, this etcd store can actually be a cluster. The point being that the etcd cluster in itself is considered a different cluster from the kubernetes cluster**
 
 ### Worker Node ### 
 Every node in cluster must run a container runtime such as docker or rocket.
