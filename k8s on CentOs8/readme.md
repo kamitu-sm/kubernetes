@@ -21,9 +21,9 @@ We will be creating a single control-plane cluster using kubeadm. We will also b
 
 Node Role        | IP Address       | DNS Name
 ---------------- | -----------------| ------------
-Master           | 192.168.100.29   | k8s_master_1
-Worker           | 192.168.100.40   | k8s_node_2
-API Loadbalancer | 192.168.100.29   | k8s_api_lb (DNS Entry pointing back to master) 
+Master           | 192.168.100.29   | k8s-master-1
+Worker           | 192.168.100.40   | k8s-node-2
+API Loadbalancer | 192.168.100.29   | k8s-api-lb (DNS Entry pointing back to master) 
 
 
 5. Full network connectivity among all machines in the cluster.
@@ -98,9 +98,9 @@ If you will not be using a DNS server, edit /etc/hosts file to contain the follo
 
 ```bash
 # cat /etc/hosts
-192.168.100.29 k8s_master_1
-192.168.100.29 k8s_api_lb
-192.168.100.40 k8s_node_2
+192.168.100.29 k8s-master-1
+192.168.100.29 k8s-api-lb
+192.168.100.40 k8s-node-2
 ```
 
 5. Install Docker
