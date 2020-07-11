@@ -82,3 +82,94 @@ Force systclt daemon to read the contents of its configuration files
 
 4. Set the DNS names
 If you will not be using a DNS server, edit /etc/hosts file to contain the following:
+
+```bash
+# cat /etc/hosts
+192.168.100.29 k8s_master_1
+192.168.100.29 k8s_api_lb
+192.168.100.40 k8s_node_2
+```
+
+5. Install and configure Docker
+
+```bash
+# yum config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+Adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+# yum install docker-ce
+Last metadata expiration check: 0:02:40 ago on Wed 04 Dec 2019 07:58:38 PM EAT.
+Error:
+Problem: package docker-ce-3:19.03.5-3.el7.x86_64 requires containerd.io >= 1.2.2-3,
+but none of the providers can be installed
+- cannot install the best candidate for the job
+- package containerd.io-1.2.10-3.2.el7.x86_64 is excluded
+- package containerd.io-1.2.2-3.3.el7.x86_64 is excluded
+- package containerd.io-1.2.2-3.el7.x86_64 is excluded
+- package containerd.io-1.2.4-3.1.el7.x86_64 is excluded
+- package containerd.io-1.2.5-3.1.el7.x86_64 is excluded
+- package containerd.io-1.2.6-3.3.el7.x86_64 is excluded
+(try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not
+only best candidate packages)
+```
+
+Installation of containerd.io > 1.2.0-3.el7 is blocked, which is a dependency of docker-ce. We will follow the one of the recommendations given above and install the no best community edition of docker
+
+```bash
+# yum install docker-ce --nobest
+```
+
+Setup daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We dont want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons
+
+
+```bash
+# cat > /etc/docker/daemon.json <<EOF
+{
+"exec-opts": ["native.cgroupdriver=systemd"],
+"log-driver": "json-file",
+"log-opts": {
+"max-size": "100m"
+},
+"storage-driver": "overlay2",
+"storage-opts": [
+"overlay2.override_kernel_check=true"
+]
+}
+EOF
+```
+
+The make the directory for the docker systemd service
+
+```bash
+# mkdir -p /etc/systemd/system/docker.service.d
+```
+
+Restart Docker
+
+
+```bash
+# systemctl daemon-reload
+# systemctl enable docker
+# systemctl restart docker
+```
+
+6. Install kubeadm, kubectl and kubelet
+
+
+Kubernetes packages are not available in the default CentOS 8 repositories. Make sure to create a kuberentes repo file with the contents below before you do the install.
+
+```bash
+# cat /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-
+x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg
+https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+# yum repolist
+# yum install kubelet kubeadm kubectl
+# systemctl daemon-reload
+# systemctl enable kubelet
+# systemctl restart kubelet
+```
