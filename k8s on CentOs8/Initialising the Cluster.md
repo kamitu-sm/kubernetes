@@ -252,9 +252,11 @@ We are piping using tee to a file because of the intresting ouput this command g
 Run the commands below as a normal user to be able to use kubectl
 
 ```bash
+
   $  mkdir -p $HOME/.kube
   $  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   $  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  
 ```
 
 ## Step 3: ***Initializing the POD Network*** ##
@@ -262,6 +264,16 @@ Run the commands below as a normal user to be able to use kubectl
 On the Master run the command below as the user above
 
 ```bash
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                   READY   STATUS    RESTARTS   AGE
+kube-system   coredns-66bff467f8-bv4bj               0/1     Pending   0          11m
+kube-system   coredns-66bff467f8-vsqr4               0/1     Pending   0          11m
+kube-system   etcd-k8s-master-1                      1/1     Running   0          11m
+kube-system   kube-apiserver-k8s-master-1            1/1     Running   0          11m
+kube-system   kube-controller-manager-k8s-master-1   1/1     Running   0          11m
+kube-system   kube-proxy-vtrbm                       1/1     Running   0          11m
+kube-system   kube-scheduler-k8s-master-1            1/1     Running   0          11m
+
 $ kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
 configmap/calico-config created
 customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
@@ -292,3 +304,39 @@ $
 ```
 
 Once a Pod network has been installed, you can confirm that it is working by checking that the CoreDNS Pod is Running in the output of ***kubectl get pods --all-namespaces***. And once the CoreDNS Pod is up and running, you can continue by joining your nodes.
+
+```bash
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                       READY   STATUS     RESTARTS   AGE
+kube-system   calico-kube-controllers-76d4774d89-jmsfh   0/1     Pending    0          78s
+kube-system   calico-node-n79kk                          0/1     Init:0/3   0          78s
+kube-system   coredns-66bff467f8-bv4bj                   0/1     Pending    0          13m
+kube-system   coredns-66bff467f8-vsqr4                   0/1     Pending    0          13m
+kube-system   etcd-k8s-master-1                          1/1     Running    0          13m
+kube-system   kube-apiserver-k8s-master-1                1/1     Running    0          13m
+kube-system   kube-controller-manager-k8s-master-1       1/1     Running    0          13m
+kube-system   kube-proxy-vtrbm                           1/1     Running    0          13m
+kube-system   kube-scheduler-k8s-master-1                1/1     Running    0          13m
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                       READY   STATUS              RESTARTS   AGE
+kube-system   calico-kube-controllers-76d4774d89-jmsfh   0/1     ContainerCreating   0          3m27s
+kube-system   calico-node-n79kk                          1/1     Running             0          3m27s
+kube-system   coredns-66bff467f8-bv4bj                   1/1     Running             0          15m
+kube-system   coredns-66bff467f8-vsqr4                   1/1     Running             0          15m
+kube-system   etcd-k8s-master-1                          1/1     Running             0          15m
+kube-system   kube-apiserver-k8s-master-1                1/1     Running             0          15m
+kube-system   kube-controller-manager-k8s-master-1       1/1     Running             0          15m
+kube-system   kube-proxy-vtrbm                           1/1     Running             0          15m
+kube-system   kube-scheduler-k8s-master-1                1/1     Running             0          15m
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE
+kube-system   calico-kube-controllers-76d4774d89-jmsfh   1/1     Running   0          4m23s
+kube-system   calico-node-n79kk                          1/1     Running   0          4m23s
+kube-system   coredns-66bff467f8-bv4bj                   1/1     Running   0          16m
+kube-system   coredns-66bff467f8-vsqr4                   1/1     Running   0          16m
+kube-system   etcd-k8s-master-1                          1/1     Running   0          16m
+kube-system   kube-apiserver-k8s-master-1                1/1     Running   0          16m
+kube-system   kube-controller-manager-k8s-master-1       1/1     Running   0          16m
+kube-system   kube-proxy-vtrbm                           1/1     Running   0          16m
+kube-system   kube-scheduler-k8s-master-1                1/1     Running   0          16m
+```
