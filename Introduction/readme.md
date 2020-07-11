@@ -20,7 +20,7 @@ The kubernetes cluster is made up of two classifications of nodes
 1.	Master nodes (Primary responsibility is management of the cluster components)
 2.	Worker node (Doing the actual workload also known as minions)
 
-At minimum you need one master node and one or many worker nodes. In a high availability cluster you can have multiple master nodes. 
+At minimum you need one master node and one or many worker nodes. **In a high availability cluster you can have multiple master nodes.** 
 
 ### Pod ### 
 In kubernetes world a pod is the base unit of the kubernetes cluster, all configurations are done in reference to pods. A pod is equivalent to a VM in the virtualization world.  It’s the scheduling unit of kubernetes. A Pod is a group of one or more containers (such as Docker containers), with shared storage/network, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context A Pod models an application-specific "logical host" - it contains one or more application containers which are relatively tightly coupled.
@@ -57,7 +57,7 @@ This controllers are responsible for the overall health of the entire cluster
 
 ***etcd***
 This is a distributed key value database store developed by CoreOS. Its the central database used to store current cluster state at any point of time. It is the single source of truth for all queries by components in regard to the state of the cluster. 
-**In a highly available cluster (fancy name for a cluster with multiple masters/control planes) configuration the etcd cluster in itself is considered a different cluster from the kubernetes cluster, whether stacked or external**
+**In a highly available cluster configuration the etcd cluster in itself is considered a different cluster from the kubernetes cluster, whether stacked or external**
 
 ### Worker Node ### 
 Every node in cluster must run a container runtime such as docker or rocket.
