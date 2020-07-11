@@ -14,6 +14,19 @@ Node Role     | IP Address
 Master        | 192.168.100.29
 Worker        | 192.168.100.23
 ...
+Table, like this one :
+
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+
+```
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
+```
 5. Full network connectivity among all machines in the cluster.
 6. A version of kubeadm that can deploy the version of Kubernetes that you want to use in your new cluster.
 7. Choose a Pod network add-on, and verify whether it requires any arguments to be passed to kubeadm when initialising the cluster. Depending on which third-party provider you choose, you might need to set the --pod-network-cidr to a provider-specific value. We will be using Calico
