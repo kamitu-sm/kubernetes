@@ -94,6 +94,7 @@ Force systclt daemon to read the contents of its configuration files
 ```
 
 4. **Set the DNS names**
+
 If you will not be using a DNS server, edit /etc/hosts file to contain the following:
 
 ```bash
@@ -244,6 +245,7 @@ Is this ok [y/N]:
 ```
 
 6. **Configure Docker daemon**
+
 Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons. This file */etc/docker/daemon.json* might need to be created
 
 
@@ -270,10 +272,10 @@ Restart Docker
 # systemctl restart docker
 ```
 
-7. Install kubeadm, kubectl and kubelet
+7. **Install kubeadm, kubectl and kubelet**
 
 
-Kubernetes packages are not available in the default CentOS 8 repositories. Make sure to create a kuberentes repo file with the contents below before you do the install.
+Kubernetes packages are not available in the default CentOS 8 repositories. Make sure to create a kuberenetes repo file with the contents below before you do the install.
 
 ```bash
 # cat /etc/yum.repos.d/kubernetes.repo
@@ -338,6 +340,12 @@ Install  10 Packages
 Total download size: 62 M
 Installed size: 265 M
 
+..................................................
+```
+
+Finally enable and restart the kubelet service
+
+```bash
 # systemctl daemon-reload
 # systemctl enable kubelet
 # systemctl restart kubelet
