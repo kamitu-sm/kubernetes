@@ -12,6 +12,7 @@ This is a guide for installing a single control-plane Kubernetes cluster on Cent
 *The reason this setup cannot scale to an external etcd is because we are not setting up a etcd store separately prior to initialising the k8s cluster. One is not able to separate the etcd store after intialising the cluster. but the steps remain as below with the difference being how the intitial master node is intialised specifying the etcd store in a yaml config file.*
 
 ## Table of Contents ##
-### Pre-flight checklist ### 
+### 1. Pre-flight checklist ### 
+### 2. Initializing your Cluster ###
 
 
