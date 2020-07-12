@@ -528,13 +528,16 @@ k8s-master-1   Ready    master   16h     v1.18.5
 k8s-node-2     Ready    master   3m32s   v1.18.5
 ```
 
-2. ***Drain it***
+2. ***Drain it*** 
+This is just incase it was carrying other pods
 
 ``` bash
 [stephen@k8s-master-1 ~]$ kubectl drain k8s-node-2 --ignore-daemonsets
-node/k8s-node-2 already cordoned
-WARNING: ignoring DaemonSet-managed Pods: kube-system/calico-node-vrw5w, kube-system/kube-proxy-zjdx4
+node/k8s-node-2 cordoned
+WARNING: ignoring DaemonSet-managed Pods: kube-system/calico-node-kfcq7, kube-system/kube-proxy-gpqlq
 node/k8s-node-2 drained
+[stephen@k8s-master-1 ~]$ 
+
 ``` 
 
 3. ***Delete it***
@@ -546,18 +549,42 @@ node "k8s-node-2" deleted
 NAME           STATUS   ROLES    AGE   VERSION
 k8s-master-1   Ready    master   17h   v1.18.5
 ``` 
+wait until there are no longer any pods on the deleted master, give it like 10 minutes
+
+``` bash
+[stephen@k8s-master-1 ~]$ kubectl get nodes
+NAME           STATUS   ROLES    AGE   VERSION
+k8s-master-1   Ready    master   19m   v1.18.5
+[stephen@k8s-master-1 ~]$ kubectl get pods --all-namespaces -o wide
+NAMESPACE     NAME                                       READY   STATUS    RESTARTS   AGE   IP               NODE           NOMINATED NODE   READINESS GATES
+kube-system   calico-kube-controllers-76d4774d89-nclh2   1/1     Running   0          17m   10.244.196.2     k8s-master-1   <none>           <none>
+kube-system   calico-node-xb7cg                          1/1     Running   0          17m   192.168.100.29   k8s-master-1   <none>           <none>
+kube-system   coredns-66bff467f8-b559w                   1/1     Running   0          19m   10.244.196.3     k8s-master-1   <none>           <none>
+kube-system   coredns-66bff467f8-pnhkg                   1/1     Running   0          19m   10.244.196.1     k8s-master-1   <none>           <none>
+kube-system   etcd-k8s-master-1                          1/1     Running   0          19m   192.168.100.29   k8s-master-1   <none>           <none>
+kube-system   kube-apiserver-k8s-master-1                1/1     Running   0          19m   192.168.100.29   k8s-master-1   <none>           <none>
+kube-system   kube-controller-manager-k8s-master-1       1/1     Running   1          19m   192.168.100.29   k8s-master-1   <none>           <none>
+kube-system   kube-proxy-rkhst                           1/1     Running   0          19m   192.168.100.29   k8s-master-1   <none>           <none>
+kube-system   kube-scheduler-k8s-master-1                1/1     Running   1          19m   192.168.100.29   k8s-master-1   <none>           <none>
+``` 
 
 4. ***On the node to be removed. Run kubeadm reset***
+
+<div class="text-red">
+  I have noticed that this command crushes the entire cluster. From the output below its clear that the command tries to connect to the api server. I suspect its a bug and will raise a bug report, but for now make sure the node has no connection to the cluster before doing this (You can unplug the network cable). <a href="#" class="text-inherit">including the link</a>
+</div>
+
+I have noticed that this command crushes the entire cluster. From the output below its clear that the command tries to connect to the api server. I suspect its a bug and will raise a bug report, but for now make sure the node has no connection to the cluster before doing this (You can unplug the network cable).
 
 ``` bash
 [root@k8s-node-2 ~]# kubeadm reset
 [reset] Reading configuration from the cluster...
 [reset] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
-W0712 12:08:55.025966   23529 reset.go:99] [reset] Unable to fetch the kubeadm-config ConfigMap from cluster: failed to get node registration: failed to get corresponding node: nodes "k8s-node-2" not found
+W0712 13:36:05.221585   18147 reset.go:99] [reset] Unable to fetch the kubeadm-config ConfigMap from cluster: failed to get config map: Get https://k8s-api-lb:6443/api/v1/namespaces/kube-system/configmaps/kubeadm-config?timeout=10s: dial tcp 192.168.100.29:6443: connect: no route to host
 [reset] WARNING: Changes made to this host by 'kubeadm init' or 'kubeadm join' will be reverted.
 [reset] Are you sure you want to proceed? [y/N]: y
 [preflight] Running pre-flight checks
-W0712 12:08:57.396651   23529 removeetcdmember.go:79] [reset] No kubeadm config, using etcd pod spec to get data directory
+W0712 13:36:10.780087   18147 removeetcdmember.go:79] [reset] No kubeadm config, using etcd pod spec to get data directory
 [reset] Stopping the kubelet service
 [reset] Unmounting mounted directories in "/var/lib/kubelet"
 [reset] Deleting contents of config directories: [/etc/kubernetes/manifests /etc/kubernetes/pki]
@@ -574,6 +601,7 @@ to reset your system's IPVS tables.
 
 The reset process does not clean your kubeconfig files and you must remove them manually.
 Please, check the contents of the $HOME/.kube/config file.
+
 ``` 
 
 Lets proceed to flush iptables and delete the /etc/cni/net.d directory after confirming its content
