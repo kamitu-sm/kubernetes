@@ -171,6 +171,7 @@ k8s-node-2     Ready    master   3m32s   v1.18.5
 ```
 
 2. ***Drain it*** 
+
 This is just incase it was carrying other pods
 
 ``` bash
