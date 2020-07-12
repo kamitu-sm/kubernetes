@@ -1,5 +1,6 @@
-## Pre-flight checklist ## 
+# Pre-flight checklist # 
 
+## Planning Requirements ##
 1. Two or more machines running CentOS 8.
 2. 2 GiB or more of RAM per machine, any less leaves little room for your apps.
 3. At least 2 CPUs on the machine that you use as a control-plane node.
