@@ -1,6 +1,12 @@
 
 # Adding another master (optional) #
 
+This is included to show you how easy it is to scale the control plane of the setup. To make this setup a proper high availability a proxy server/ Load balancer should be set up with your control plane nodes behind it. This load balancer distributes traffic to all healthy control plane nodes in its target list. The health check for an apiserver is a TCP check on the port the kube-apiserver listens on (default value :6443). The load balancer must be able to communicate with all control plane nodes on the apiserver port. It must also allow incoming traffic on its listening port.
+
+DNS entry for **k8s-api-lb** should point to this load balancer. The listening port for the loadbalancer for this setup should be **6443**.
+
+## Let's get to it ##
+
 For each additional control plane node you should execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
 
 ```
