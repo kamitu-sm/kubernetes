@@ -570,9 +570,9 @@ kube-system   kube-scheduler-k8s-master-1                1/1     Running   1    
 
 4. ***On the node to be removed. Run kubeadm reset***
 
-```diff
+
 - ***I have noticed that this command crushes the entire cluster. From the output below its clear that the command tries to connect to the api server. I suspect its a bug and will raise a bug report, but for now make sure the node has no connection to the cluster before doing this (You can unplug the network cable).***
-```
+
 
 ``` bash
 [root@k8s-node-2 ~]# kubeadm reset
