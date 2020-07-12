@@ -76,8 +76,8 @@ To make this configuration persistent between reboots, edit the /etc/fstab file 
 # sed -i 's/^.*swap/#&/' /etc/fstab
 ```
 
-To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers to cluster to work properly disable swap, also set vm.swappiness=0. 
-Modify the kernel parameters for filtering, port forwarding and vm.swappiness. Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This will make the changes persistent between reboots.
+To ensure that packets are properly processed by IP tables during filtering and port forwarding, set the net.bridge.bridge-nf-call-iptables to ‘1’ in your sysctl config file. For the containers in the cluster to work properly disable swap, also set vm.swappiness=0. 
+Below we are creating a kernel parameter file k8s.conf and placing it in the /etc/sysctl.d directory. This file will modify the kernel parameters for filtering, port forwarding and vm.swappiness. This will make the changes persistent between reboots.
 
 ```bash
 # vi /etc/sysctl.d/k8s.conf
@@ -87,7 +87,7 @@ net.ipv4.ip_forward = 1
 vm.swappiness=0
 ```
 
-Force systclt daemon to read the contents of its configuration files
+Force sysctl daemon to read the contents of its configuration files
 
 ```bash
 # sysctl --system
