@@ -39,7 +39,6 @@ localAPIEndpoint:
   bindPort: 6443
 nodeRegistration:
   criSocket: /var/run/dockershim.sock
-  name: k8s-master-1
   taints:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
