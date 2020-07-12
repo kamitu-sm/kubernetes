@@ -36,7 +36,7 @@ API Loadbalancer | 192.168.100.29   | k8s-api-lb (DNS Entry pointing back to mas
 There are a few things to be done to get the servers ready. You need to perform the following task on all servers. 
 
 
-1. Disable the Selinux
+1. **Disable the Selinux**
 
 The containers need to access the host file system; therefore SELinux needs to be disabled. Edit the /etc/selinux/config file and change SELINUX=enforcing to SELINUX=disabled or permissive
 
@@ -47,7 +47,7 @@ The containers need to access the host file system; therefore SELinux needs to b
 After this a reboot is required
 
 
-2. Disable firewalld
+2. **Disable firewalld**
 
 
 As long as firewalld(the system firewall manager) is enabled, DNS resolution inside docker containers does not work. We are going to be using iptables, disable firewalld daemon
@@ -63,7 +63,7 @@ Allow all traffic between the cluster nodes by creating an accept all rule on ip
 # iptables -P FORWARD ACCEPT
 ```
 
-3. Disable swap and enable port forwarding
+3. **Disable swap and enable port forwarding**
 
 For runtime type
 ```bash
@@ -93,7 +93,7 @@ Force systclt daemon to read the contents of its configuration files
 # sysctl --system
 ```
 
-4. Set the DNS names
+4. **Set the DNS names**
 If you will not be using a DNS server, edit /etc/hosts file to contain the following:
 
 ```bash
@@ -103,7 +103,7 @@ If you will not be using a DNS server, edit /etc/hosts file to contain the follo
 192.168.100.40 k8s-node-2
 ```
 
-5. Install Docker
+5. **Install Docker**
 
 ```bash
 # yum config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
@@ -194,7 +194,7 @@ Error:
 (try to add '--skip-broken' to skip uninstallable packages or '--nobest' to use not only best candidate packages)
 ```
 
-Installation of containerd.io > 1.2.0-3.el7 is blocked, which is a dependency of docker-ce. We will follow the one of the recommendations given above and install the no best community edition of docker
+Installation of containerd.io-1.2.10-3.2.el7.x86_64 is filtered out by modular filtering, which is a dependency of docker-ce. We will follow the one of the recommendations given above and install the no best community edition of docker
 
 ```bash
 # yum install docker-ce --nobest
@@ -243,7 +243,7 @@ Is this ok [y/N]:
 
 ```
 
-6. Configure Docker daemon
+6. **Configure Docker daemon**
 Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons. This file */etc/docker/daemon.json* might need to be created
 
 
