@@ -1,6 +1,6 @@
 # Initializing your Cluster #
 
-Please make sure you have read through the readme and prepared the setup before attempting the below 
+Please make sure you have read through the pre-flight checklist and prepared the setup before attempting the below 
 
 ### Considerations about --apiserver-advertise-address and --control-plane-endpoint ###
 
