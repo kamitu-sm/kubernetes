@@ -1,6 +1,6 @@
 # Adding worker node #
 
-For each additional worker node you should: Execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
+For each additional worker node you should execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
 
 ```
 Then you can join any number of worker nodes by running the following on each as root:
