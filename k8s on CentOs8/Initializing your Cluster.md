@@ -518,9 +518,9 @@ This proves that the cluster can support high availability. I will be removing t
 
 ### How to delete a master node ###
 
-On another Master Node
+On any other master node with kubectl configured
 
-1. Find the node
+1. ***Find the node***
 
 ``` bash
 [stephen@k8s-master-1 ~]$ kubectl get nodes
@@ -529,7 +529,7 @@ k8s-master-1   Ready    master   16h     v1.18.5
 k8s-node-2     Ready    master   3m32s   v1.18.5
 ```
 
-2. Drain it
+2. ***Drain it***
 
 ``` bash
 [stephen@k8s-master-1 ~]$ kubectl drain k8s-node-2 --ignore-daemonsets
@@ -538,7 +538,7 @@ WARNING: ignoring DaemonSet-managed Pods: kube-system/calico-node-vrw5w, kube-sy
 node/k8s-node-2 drained
 ``` 
 
-3. Delete it
+3. ***Delete it***
 
 ``` bash
 [stephen@k8s-master-1 ~]$ kubectl delete node k8s-node-2
@@ -548,7 +548,7 @@ NAME           STATUS   ROLES    AGE   VERSION
 k8s-master-1   Ready    master   17h   v1.18.5
 ``` 
 
-On (nodetoberemoved). Remove join/init setting from node
+4. ***On the node to be removed. Run kubeadm reset***
 
 ``` bash
 [root@k8s-node-2 ~]# kubeadm reset
@@ -576,7 +576,6 @@ to reset your system's IPVS tables.
 The reset process does not clean your kubeconfig files and you must remove them manually.
 Please, check the contents of the $HOME/.kube/config file.
 ``` 
-
 
 
 ## Step 5: ***Adding worker node*** ##
