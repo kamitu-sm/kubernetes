@@ -576,6 +576,16 @@ The reset process does not clean your kubeconfig files and you must remove them 
 Please, check the contents of the $HOME/.kube/config file.
 ``` 
 
+Lets proceed to flush iptables and delete the /etc/cni/net.d directory after confirming its content
+
+
+```bash
+[root@k8s-node-2 ~]# iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+[root@k8s-node-2 ~]# ls /etc/cni/net.d
+10-calico.conflist  calico-kubeconfig
+[root@k8s-node-2 ~]# rm -rf /etc/cni/net.d
+
+```
 
 ## Step 5: ***Adding worker node*** ##
 
