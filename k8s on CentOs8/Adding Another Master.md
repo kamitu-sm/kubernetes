@@ -11,7 +11,9 @@ You can now join any number of the control-plane node running the following comm
     --control-plane --certificate-key 0bbe9c06c89dde9a9829269abe502d884edb53c00644a4107800477547726b74
 ```
 The --control-plane flag tells kubeadm join to create a new control plane.
-The --certificate-key ... will cause the control plane certificates to be downloaded from the kubeadm-certs Secret in the cluster and be decrypted using the given key.
+
+
+The --certificate-key will cause the control plane certificates to be downloaded from the kubeadm-certs Secret in the cluster and be decrypted using the given key.
 
 So we are following this, go into the node you are trying to join as root and paste this command
 
