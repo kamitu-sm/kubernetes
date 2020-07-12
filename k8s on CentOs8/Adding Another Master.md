@@ -1,5 +1,5 @@
 
-# (optional) Adding another master #
+# Adding another master (optional) #
 
 For each additional control plane node you should: Execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
 
