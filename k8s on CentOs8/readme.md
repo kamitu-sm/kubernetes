@@ -16,8 +16,8 @@ This is a guide for installing a single control-plane Kubernetes cluster on Cent
 Preparing your servers for the cluster setup
 ### 2. Initializing your Cluster ###
 Creating your cluster
-### 3. Adding Another Master###
-POC to show that the cluster setup can easily scale to add another control plane
-### 4. Adding worker node ###
+### 3. Adding Another Master ###
+This POC will show you how to add another control plane to the cluster setup. This shows that the setup can easily scale to add other control planes
+### 4. Adding Worker Node ###
 This will show you how to add worker nodes to your cluster
 
