@@ -56,20 +56,6 @@ Now we have a new certifcation key, which we will be substituting into the previ
 
 ```bash
 [root@k8s-node-2 ~]# kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
->     --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 \
->     --control-plane --certificate-key 0bbe9c06c89dde9a9829269abe502d884edb53c00644a4107800477547726b74
-[preflight] Running pre-flight checks
-	[WARNING FileExisting-tc]: tc not found in system path
-[preflight] Reading configuration from the cluster...
-[preflight] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
-[preflight] Running pre-flight checks before initializing the new control plane instance
-[preflight] Pulling images required for setting up a Kubernetes cluster
-[preflight] This might take a minute or two, depending on the speed of your internet connection
-[preflight] You can also perform this action in beforehand using 'kubeadm config images pull'
-[download-certs] Downloading the certificates in Secret "kubeadm-certs" in the "kube-system" Namespace
-error execution phase control-plane-prepare/download-certs: error downloading certs: error downloading the secret: Secret "kubeadm-certs" was not found in the "kube-system" Namespace. This Secret might have expired. Please, run `kubeadm init phase upload-certs --upload-certs` on a control plane to generate a new one
-To see the stack trace of this error execute with --v=5 or higher
-[root@k8s-node-2 ~]# kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
 >      --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 \
 >      --control-plane --certificate-key 7c5a2e54fb22e91dc71f0a0c61e9d9a7933082f5073d7937e45692297546144f
 [preflight] Running pre-flight checks
