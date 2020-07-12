@@ -22,7 +22,7 @@ We will be creating a single control-plane cluster using kubeadm. We will also b
 Node Role        | IP Address       | DNS Name
 ---------------- | -----------------| ------------
 Master           | 192.168.100.29   | k8s-master-1
-Worker           | 192.168.100.40   | k8s-node-2
+Worker           | 192.168.100.34   | k8s-node-2
 API Loadbalancer | 192.168.100.29   | k8s-api-lb (DNS Entry pointing back to master) 
 
 
@@ -101,7 +101,7 @@ If you will not be using a DNS server, edit /etc/hosts file to contain the follo
 # cat /etc/hosts
 192.168.100.29 k8s-master-1
 192.168.100.29 k8s-api-lb
-192.168.100.40 k8s-node-2
+192.168.100.34 k8s-node-2
 ```
 
 5. **Install Docker**
