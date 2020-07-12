@@ -346,5 +346,43 @@ kube-system   kube-proxy-vtrbm                           1/1     Running   0    
 kube-system   kube-scheduler-k8s-master-1                1/1     Running   0          16m
 ```
 
-## Step 4: ***Adding another master*** ##
+## Step 4: ***(optional) Adding another master*** ##
+
+For each additional control plane node you should: Execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
+
+```
+You can now join any number of the control-plane node running the following command on each as root:
+
+  kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
+    --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 \
+    --control-plane --certificate-key 0bbe9c06c89dde9a9829269abe502d884edb53c00644a4107800477547726b74
+```
+
+So we are following this
+
+```
+  $ kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
+    --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 \
+    --control-plane --certificate-key 0bbe9c06c89dde9a9829269abe502d884edb53c00644a4107800477547726b74
+```
+
+The --control-plane flag tells kubeadm join to create a new control plane.
+The --certificate-key ... will cause the control plane certificates to be downloaded from the kubeadm-certs Secret in the cluster and be decrypted using the given key.
+
 ## Step 5: ***Adding worker node*** ##
+
+For each additional worker node you should: Execute the join command that was previously given to you by the kubeadm init output on the first node. It should look something like this:
+
+```
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
+    --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 
+```
+
+So we are following this
+
+```
+$ kubeadm join k8s-api-lb:6443 --token y40psg.1gl8f0exzc11pedz \
+    --discovery-token-ca-cert-hash sha256:b17c8c854ddb9e5cc514c0a607aab57ae640a26ffeff8c0ebf390420aee71f43 
+```
