@@ -1,11 +1,11 @@
+## Kubernetes YAML Basics ##
 
+All Kuberenetes YAML files have the map structure below with the specific key values depending on the type of object being configured
 
 ```yaml
 ---
- apiVersion: extensions/v1beta1
- kind: Deployment
+ apiVersion:
+ kind:
  metadata:
-   name: rss-site
  spec:
-   replicas: 2
 ```
