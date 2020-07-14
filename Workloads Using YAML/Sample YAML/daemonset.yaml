@@ -7,8 +7,8 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: daemonset-example #Must match container template label
-  template:
+      app: daemonset-example # Must match container template label
+  template: # This is equivalent to the Pod definition yaml file object
     metadata:
       labels:
         app: daemonset-example
