@@ -231,9 +231,12 @@ Is this ok [y/N]:
 
 ```
 
-6. **Configure Docker daemon**
+6. **Configure Docker daemon to use systemd**
 
-Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file). We don't want a scenario were we have the daemon being managed by both systemd and cgroupfs for stability reasons. This file */etc/docker/daemon.json* might need to be created
+Setup the daemon to use systemd instead of cgroupsfs (Requirements for kubeadm, the same will be done on the kubelet via initial config file).
+When systemd is chosen as the init system for a linux distribution.  The init process generates and consumes a root cgroup and acts as a cgroup manager.  Systemd has a tight integration with cgroups and will allocate cgroups per process. While it's possible to configure docker and kubelet to use cgroupfs this means that there will then be two different cgroup managers. At the end of the day, cgroups are used to allocate and constrain resources that are allocated to processes. A single cgroup manager will simplify the view of what resources are being allocated and will by default have a more consistent view of the resources available / in use. When we have two managers we end up with two views of those available resources. We have seen cases in the field where nodes that are configured to use cgroupfs for kubelet and docker and systemd for the rest can become unstable under resource pressure. Changing the settings such that docker and kubelet use systemd as a cgroup-driver stabilized the systems. ***Advise from the k8s community***
+
+This file */etc/docker/daemon.json* might need to be created
 
 
 ```bash
