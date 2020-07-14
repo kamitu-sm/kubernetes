@@ -92,8 +92,8 @@ ComponentStatus            |	v1
 ConfigMap                  |	v1
 ControllerRevision         |	apps/v1
 CronJob                    |	batch/v1beta1
-DaemonSet                  |	extensions/v1beta1
-Deployment                 |	extensions/v1beta1
+DaemonSet                  |	apps/v1
+Deployment                 |	apps/v1
 Endpoints                  |	v1
 Event                      |	v1
 HorizontalPodAutoscaler    |	autoscaling/v1
