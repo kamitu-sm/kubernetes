@@ -19,12 +19,12 @@ All Kuberenetes YAML files have the map structure below with the specific key va
  spec:
 ```
 
-apiVersion - Which version of the Kubernetes API you're using to create this object
-kind - What kind of object you want to create
-metadata - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
-spec - What state you desire for the object
+* ***apiVersion*** - Which version of the Kubernetes API you're using to create this object
+* ***kind*** - What kind of object you want to create
+* ***metadata*** - Data that helps uniquely identify the object, including a name string, UID, and optional namespace
+* ***spec*** - What state you desire for the object
 
-### Which Kubernetes apiVersion Should I Use? ###
+### Relationship between apiVersion and Kind ###
 An object definition in Kubernetes requires an apiVersion field. When Kubernetes has released an update that is avaialable for you to use or changes something in its API, a new apiVersion is created.
 
 However, the official Kubernetes documentation provides little guidance on apiVersion. This guide gives you a cheat sheet on which version to use, explains each version, and gives you the timeline of releases.
