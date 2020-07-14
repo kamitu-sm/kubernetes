@@ -7,7 +7,7 @@ Container orchestration is the automatic process of managing or scheduling the w
 
 ## Kubernetes Overview ##  
 By understanding the architecture and terminologies we are able to better understand the various configurations that are needed to build and maintain your kubernetes cluster.
-Let us start with core terminologies that are required to understand the architecture and then build on that further as we explain the architecture.
+Let us start with terminologies that are required to understand the Kubernetes and then build on that further as we explain the architecture.
 
 <img src="https://github.com/kamitu-sm/kubernetes/blob/master/Introduction/introduction%20terminologies.png" alt="KUBERNETES OVERVIEW" width="627" height="506">
 
