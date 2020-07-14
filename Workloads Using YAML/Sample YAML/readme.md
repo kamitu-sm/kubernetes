@@ -1,7 +1,7 @@
-## Introduction ##
+# Introduction #
 This folder contains sample object yaml files for different objects identified with the name of the yaml file, also below is a helpful introduction on various k8s objects commonly used in the clsuter
 
-### Kubernetes replication ###
+## Kubernetes replication ##
 Typically you would want to replicate your containers (and thereby your applications) for several reasons, including:
 1. Reliability: By having multiple versions of an application, you prevent problems if one or more fails.
 2. Load balancing: Having multiple versions of a container enables you to easily send traffic to different instances to prevent overloading of a single instance or node. 
@@ -22,7 +22,7 @@ Replica Sets are a sort of hybrid, in that they are in some ways more powerful t
 ***Deployments***
 Deployments are intended to replace Replication Controllers.  They provide the same replication functions (through Replica Sets) and also the ability to rollout changes and roll them back if necessary.
 
-### What is a Service in Kubernetes? ###
+## What is a Service in Kubernetes? ##
 A Service enables network access to a set of Pods in Kubernetes.
 
 Services select Pods based on their labels. When a network request is made to the service, it selects all Pods in the cluster matching the service's selector, chooses one of them, and forwards the network request to it.
