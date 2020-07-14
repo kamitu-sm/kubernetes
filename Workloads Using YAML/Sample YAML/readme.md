@@ -159,3 +159,10 @@ spec:
     secret:
       secretName: mysecret
 ```
+
+## Kubernetes Job ##
+You can use a Kubernetes Job to run batch processes, intialise databases , ad-hoc operations, etc. It starts off a Pod and lets it run to completion. This is quite different from other Pod controllers such a Deployment or ReplicaSet.
+
+There are two types of jobs
+1. jobs, This is a Job execution that is started manually.
+2. cron jobs, A CronJob object allows you to schedule Job execution rather than starting them manually.
