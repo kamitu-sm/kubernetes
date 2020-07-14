@@ -6,8 +6,8 @@ apiVersion: extensions/v1beta1
    replicas: 3
    selector:
      matchLabels:
-       app: soaktestrs
-   template:
+       app: soaktestrs # Must match pod label
+   template:  # This is equivalent to the Pod definition yaml file object
      metadata:
        labels:
          app: soaktestrs
