@@ -12,6 +12,7 @@ YAML is a superset of JSON, which means that any valid JSON file is also a valid
 Fortunately, there are only two types of structures you need to know about in YAML:
 * Lists
 * Maps
+
 That’s it. You might have maps of lists and lists of maps, and so on, but if you’ve got those two structures down, you’re all set. That’s not to say there aren’t more complex things you can do, but in general, this is all you need to get started.
 
 ### YAML Maps ###
