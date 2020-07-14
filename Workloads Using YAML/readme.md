@@ -8,4 +8,6 @@ In this article, we’ll look at how YAML works and use it to define various kub
 This will be an introduction to YAML and why its better than JSON
 ### 2. Kubernetes YAML Basics ###
 This will be an introduction to YAML file structure specific to kubernetes
+### 3. Sample YAML ###
+Sample kubernetes objects yaml files
 
