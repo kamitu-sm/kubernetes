@@ -15,7 +15,7 @@ Let us start with terminologies that are required to understand the Kubernetes a
 A computer cluster is a set of loosely or tightly connected computers that work together so that, in many respects, they can be viewed as a single system. 
 
 ***Node***
-A node is a physical server or virtual machines with an operating systems running on top of it. Kubernetes is really a master-slave type of architecture with certain components (master components) calling the shots in the cluster, and other components (node components) executing application workloads (containers) as decided by the master components.Therefore kubernetes cluster is made up of two classifications of nodes
+A node is a physical server or virtual machines with an operating systems running on top of it. Kubernetes is really a master-slave type of architecture with certain components (master components) calling the shots in the cluster, and other components (node components) executing application workloads as decided by the master components.Therefore kubernetes cluster is made up of two classifications of nodes
 1.	Master/Control Plane nodes (The control-plane/Master node is the machine where the master components run)
 2.	Worker/Minion node (The worker/minion node is the machine where application workloads run)
 
