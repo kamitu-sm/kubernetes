@@ -84,7 +84,7 @@ This apiVersion includes extra functionality for Kubernetes role-based access co
 
 
 Kind  (Object)             |   	apiVersion
-------------------------------------------------------------------
+---------------------------|------------------------------------
 CertificateSigningRequest  |	certificates.k8s.io/v1beta1
 ClusterRoleBinding         |	rbac.authorization.k8s.io/v1
 ClusterRole                |	rbac.authorization.k8s.io/v1
