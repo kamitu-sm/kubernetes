@@ -10,8 +10,8 @@ Using YAML for K8s definitions gives you a number of advantages, including:
 YAML is a superset of JSON, which means that any valid JSON file is also a valid YAML file. So on the one hand, if you know JSON and you’re only ever going to write your own YAML (as opposed to reading other people’s) you’re all set.  On the other hand, that’s not very likely, unfortunately.  Even if you’re only trying to find examples on the web, they’re most likely in (non-JSON) YAML, so we might as well get used to it.  Still, there may be situations where the JSON format is more convenient, so it’s good to know that it’s available to you.
 
 Fortunately, there are only two types of structures you need to know about in YAML:
-1. Lists
-2. Maps
+* Lists
+* Maps
 That’s it. You might have maps of lists and lists of maps, and so on, but if you’ve got those two structures down, you’re all set. That’s not to say there aren’t more complex things you can do, but in general, this is all you need to get started.
 
 ### YAML Maps ###
