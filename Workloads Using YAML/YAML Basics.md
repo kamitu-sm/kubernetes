@@ -113,34 +113,6 @@ So as you can see here, we have a list of containers “objects”, each of whic
 For completeness, let’s quickly look at the JSON equivalent:
 
 ```json
-{ 
-  “apiVersion”: “v1”, 
-  “kind”: “Pod”, 
-  “metadata”: { 
-    “name”: “rss-site”, 
-    “labels”: { 
-      “app”: “web” 
-     } 
-   }, 
-   “spec”: { 
-    “containers”: [
-      {
-        “name”: “front-end”, 
-        “image”: “nginx”, 
-        “ports”: [
-          { “containerPort”: “80” }
-        ] 
-        }, 
-      { 
-        “name”: “rss-reader”, 
-        “image”: “nickchase/rss-php-nginx:v1”, 
-        “ports”: [
-          { “containerPort”: “88” }
-         ] 
-       }
-     ]
-    }
-  }
 ```
 
 As you can see, we’re starting to get pretty complex, and we haven’t even gotten into anything particularly complicated! No wonder YAML is replacing JSON so fast.
