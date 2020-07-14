@@ -27,6 +27,8 @@ A Service enables network access to a set of Pods in Kubernetes.
 
 Services select Pods based on their labels. When a network request is made to the service, it selects all Pods in the cluster matching the service's selector, chooses one of them, and forwards the network request to it.
 
+<img src="https://github.com/kamitu-sm/kubernetes/blob/master/Workloads%20Using%20YAML/Sample%20YAML/service.png" alt="KUBERNETES SERVICE OVERVIEW">
+
 The type property in the Service's spec determines how the service is exposed to the network. It changes where a Service is able to be accessed from. The possible types are ClusterIP, NodePort, and LoadBalancer
 
 1. ClusterIP – The default value. The service is only accessible from within the Kubernetes cluster – you can’t make requests to your Pods from outside the cluster!
