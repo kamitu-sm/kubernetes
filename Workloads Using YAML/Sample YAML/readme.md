@@ -53,3 +53,53 @@ Now that we understand DaemonSets, here are some examples of why and how to use 
 * Prometheus Node Exporter
 * collectd
 * Datadog agent
+
+## ConfigMap in Kubernetes ##
+A ConfigMap stores configuration settings that your Kubernetes Pods consume.
+
+### How does a ConfigMap work? ###
+A ConfigMap is a dictionary of key-value pairs that store configuration settings for your applications. 
+
+First, create a ConfigMap in your cluster by tweaking our sample YAML to your needs.
+
+```yaml
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: example-configmap 
+data:
+  # Configuration values can be set as key-value properties
+  database: mongodb
+  database_uri: http://localhost:27017
+  
+  # Or set as complete file contents (even JSON!)
+  keys: | 
+    image.public.key=771 
+    rsa.public.key=42
+```
+Second, consume to ConfigMap in your Pods and use its values. Set envFrom to a reference to the ConfigMap you’ve created.
+
+```yaml
+kind: Pod 
+apiVersion: v1 
+metadata:
+  name: pod-env-var 
+spec:
+  containers:
+    - name: env-var-configmap
+      image: nginx:1.7.9 
+      envFrom:
+        - configMapRef:
+            name: example-configmap
+```
+
+confirm inside your container
+
+```bash
+$ kubectl exec -it pod-env-var sh
+# env
+DATABASE=mongodb
+DATABASE_URI=http://localhost:27017
+image.public.key=771
+rsa.public.key=42
+```
