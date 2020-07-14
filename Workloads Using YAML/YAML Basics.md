@@ -112,7 +112,7 @@ So as you can see here, we have a list of containers “objects”, each of whic
 
 For completeness, let’s quickly look at the JSON equivalent:
 
-```json
+```
 { 
 	“apiVersion”: “v1”, 
 	“kind”: “Pod”, 
