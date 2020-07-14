@@ -33,8 +33,8 @@ However, the official Kubernetes documentation provides little guidance on apiVe
 To make it easier to extend its API, Kubernetes implements API groups. The API group is specified in a REST path and in the apiVersion field of a serialized object.
 
 There are several API groups in a cluster:
-* The core group, also referred to as the legacy group, is at the REST path /api/v1 and uses apiVersion: v1.
-* Named groups are at REST path /apis/$GROUP_NAME/$VERSION, and use apiVersion: $GROUP_NAME/$VERSION (e.g. apiVersion: batch/v1). The Kubernetes API reference has a full list of available API groups.
+* The core group, also referred to as the legacy group. This is at the REST path /api/v1 and uses apiVersion: v1.
+* The named groups, which are at the REST path /apis/$GROUP_NAME/$VERSION, and use apiVersion: $GROUP_NAME/$VERSION (e.g. apiVersion: batch/v1). The Kubernetes API reference has a full list of available API groups.
 
 ### API versioning ###
 To make it easier to eliminate fields or restructure resource representations, Kubernetes supports multiple API versions, for each group
